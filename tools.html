@@ -15,11 +15,16 @@
     <div>
       图片名：<input type="text" v-model="imgName">
     </div>
+    <h4>gitHub</h4>
     <div>
-      服务器地址：<span>{{serviceUrl}}</span>
+      服务器地址/markdown 路径：<span>{{gitHubServiceUrl}}</span>
+    </div>
+    <h4>gitee</h4>
+    <div>
+      服务器地址：<span>{{giteeServiceUrl}}</span>
     </div>
     <div>
-      markdown 路径：<span>{{markdownUrl}}</span>
+      markdown 路径：<span>{{giteeMarkdownUrl}}</span>
     </div>
   </div>
   <script>
@@ -28,15 +33,19 @@
       data() {
         return {
           imgName: '',
-          baseUrl: 'https://gitee.com/zhm192759521/picgo-img/{0}/master/img/{1}',
+          giteeBaseUrl: 'https://gitee.com/zhm192759521/picgo-img/{0}/master/img/{1}',
+          gitHubBaseUrl: 'https://raw.githubusercontent.com/zhmvictor/PicgoImg/main/img/{0}'
         }
       },
       computed: {
-        serviceUrl() {
-          return this.imgName ? this.baseUrl.replace('{0}', 'blob').replace('{1}', this.imgName) : '';
+        gitHubServiceUrl() {
+          return this.imgName ? this.gitHubBaseUrl.replace('{0}', this.imgName) : '';
         },
-        markdownUrl() {
-          return this.imgName ? this.baseUrl.replace('{0}', 'raw').replace('{1}', this.imgName) : '';
+        giteeServiceUrl() {
+          return this.imgName ? this.giteeBaseUrl.replace('{0}', 'blob').replace('{1}', this.imgName) : '';
+        },
+        giteeMarkdownUrl() {
+          return this.imgName ? this.giteeBaseUrl.replace('{0}', 'raw').replace('{1}', this.imgName) : '';
         }
       }
     };
