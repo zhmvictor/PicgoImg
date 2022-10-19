@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>markdown 地址转换工具</title>
+  <!-- 导入 Vue3 -->
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      图片名：<input type="text" v-model="imgName">
+    </div>
+    <div>
+      服务器地址：<span>{{serviceUrl}}</span>
+    </div>
+    <div>
+      markdown 路径：<span>{{markdownUrl}}</span>
+    </div>
+  </div>
+  <script>
+    const { createApp } = Vue;
+    const App = {
+      data() {
+        return {
+          imgName: '',
+          baseUrl: 'https://gitee.com/zhm192759521/picgo-img/{0}/master/img/{1}',
+        }
+      },
+      computed: {
+        serviceUrl() {
+          return this.imgName ? this.baseUrl.replace('{0}', 'blob').replace('{1}', this.imgName) : '';
+        },
+        markdownUrl() {
+          return this.imgName ? this.baseUrl.replace('{0}', 'raw').replace('{1}', this.imgName) : '';
+        }
+      }
+    };
+    const app = createApp(App);
+    app.mount('#app');
+  </script>
+</body>
+
+</html>
